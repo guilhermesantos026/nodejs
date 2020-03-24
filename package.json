@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/guilhermesantos026/nodejs#readme",
   "dependencies": {
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "marko": "4.19.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
