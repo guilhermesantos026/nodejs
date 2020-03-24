@@ -1,8 +1,15 @@
-const http = require('http');
+const express = require('express');
 
-const ip = 'localhost';
-const port = 3000;
+const app = express();
 
-http.createServer(function(req, resp){
-    resp.end('<html><body>First request</body></html>');
-}).listen(port, ip);
+app.listen(3000, function() {
+    
+});
+
+app.get('/', function(req, resp) {
+    resp.send('<html><body>First get method request</body></html>');
+});
+
+app.get('/books', function(req, resp) {
+    resp.send('<html><body>list books</body></html>');
+});
