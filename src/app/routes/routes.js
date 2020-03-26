@@ -15,16 +15,13 @@ module.exports = (app) => {
 
         const bookDao = new BookDao(db);
 
-        bookDao.listBooks(function(error, results) {
-            
-            console.log(results);
-
-            resp.marko(
+        bookDao.list()
+            .then(books => resp.marko(
                 require('../views/books/list/list.marko'),
                 {
-                    books: results
+                    books: books
                 }
-            );            
-        });
+            ))
+            .catch(error => console.log(error));
     });
 }
