@@ -16,7 +16,7 @@ INSERT INTO usuarios (
     nome_completo, 
     email,
     senha
-) SELECT 'Guilherme Fermino', 'guilherme@email.com.br', '123' WHERE NOT EXISTS (SELECT * FROM usuarios WHERE email = 'gabriel@alura.com.br')
+) SELECT 'Guilherme Fermino', 'guilherme@email.com.br', '123' WHERE NOT EXISTS (SELECT * FROM usuarios WHERE email = 'guilherme@email.com.br')
 `;
 
 const LIVROS_SCHEMA = 
