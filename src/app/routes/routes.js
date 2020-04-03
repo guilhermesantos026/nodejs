@@ -24,4 +24,17 @@ module.exports = (app) => {
             ))
             .catch(error => console.log(error));
     });
+
+    app.get('/books/form', function(req, resp) {
+        resp.marko(require('../views/books/form/form.marko'))
+    });
+
+    app.post('/books', function(req, resp) {
+
+        const bookDao = new BookDao(db);
+
+        bookDao.add(req.body)
+        .then(resp.redirect('/books'))
+        .catch(error => console.log(error));
+    });
 }
