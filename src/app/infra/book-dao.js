@@ -40,6 +40,21 @@ class BookDao {
             } )
         });
     }
+
+    findById(id) {
+        return new Promise((resolve, reject) => {
+            
+            this._db.get('select * from livros where id = ?'
+                ,[id]
+                ,(error, book) => {
+                    if(error) {
+                        return reject('Not possible find by id' + error);
+                    }
+                return resolve(book);
+                }   
+            );
+        });
+    }
 }
 
 module.exports = BookDao;

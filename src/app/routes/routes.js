@@ -37,4 +37,20 @@ module.exports = (app) => {
         .then(resp.redirect('/books'))
         .catch(error => console.log(error));
     });
+
+    app.get('/book/find/:id', function(req, resp) {
+
+        const bookDao = new BookDao(db);
+
+        bookDao.findById(req.params.id)
+        .then(
+            book => resp.marko (
+            require('../views/books/form/form.marko'),
+            {
+                book: book
+            }
+        ))
+        .catch(error => console.log(error));
+
+    });
 }
