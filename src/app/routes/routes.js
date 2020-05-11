@@ -26,7 +26,11 @@ module.exports = (app) => {
     });
 
     app.get('/books/form', function(req, resp) {
-        resp.marko(require('../views/books/form/form.marko'))
+        resp.marko(require('../views/books/form/form.marko'), 
+            {
+                book: {}
+            }
+        );
     });
 
     app.post('/books', function(req, resp) {
