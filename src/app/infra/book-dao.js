@@ -55,6 +55,20 @@ class BookDao {
             );
         });
     }
+
+    delete(id) {
+        return new Promise((resolve, reject) => {
+            this._db.run('delete from livros where id = ?'
+            ,[id]
+            ,(error) => {
+                if(error) {
+                    return reject ('Not possible delete book by id' + error);
+                }
+                    return resolve();
+                }
+            );
+        });
+    }
 }
 
 module.exports = BookDao;

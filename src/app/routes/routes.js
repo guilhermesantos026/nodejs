@@ -57,4 +57,13 @@ module.exports = (app) => {
         .catch(error => console.log(error));
 
     });
+
+    app.delete('/book/delete/:id', function(req, resp) {
+
+        const bookDao = new BookDao(db);
+
+        bookDao.delete(req.params.id)
+        .then(() => resp.status(200).end())
+        .catch(error => console.log(error));
+    });
 }
