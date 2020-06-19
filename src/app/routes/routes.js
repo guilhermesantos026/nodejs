@@ -7,7 +7,7 @@ module.exports = (app) => {
     app.get('/', function(req, resp) {
         resp.marko(
             require('../views/books/default.marko')
-            );
+        );
         
     });
 
@@ -25,7 +25,7 @@ module.exports = (app) => {
             .catch(error => console.log(error));
     });
 
-    app.get('/books/form', function(req, resp) {
+    app.get('/book/form', function(req, resp) {
         resp.marko(require('../views/books/form/form.marko'), 
             {
                 book: {}
@@ -33,7 +33,7 @@ module.exports = (app) => {
         );
     });
 
-    app.post('/books', function(req, resp) {
+    app.post('/book', function(req, resp) {
 
         const bookDao = new BookDao(db);
 
@@ -58,12 +58,22 @@ module.exports = (app) => {
 
     });
 
-    app.delete('/book/delete/:id', function(req, resp) {
+    app.delete('/book/:id', function(req, resp) {
 
         const bookDao = new BookDao(db);
 
         bookDao.delete(req.params.id)
         .then(() => resp.status(200).end())
         .catch(error => console.log(error));
+    });
+
+    app.put('/book', function(req, resp) {
+
+        const bookDao = new BookDao(db);
+
+         bookDao.update(req.body)
+        .then(() => resp.redirect('/books'))
+        .catch(error => console.log(error));
+
     });
 }

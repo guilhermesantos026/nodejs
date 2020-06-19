@@ -69,6 +69,28 @@ class BookDao {
             );
         });
     }
+
+    update(book) {
+        return new Promise((resolve, reject) => {
+            this._db.run(`update livros set
+            titulo = ?,
+            preco = ?,
+            descricao = ?
+             where id = ?`
+             ,[
+                book.titulo,
+                book.preco,
+                book.descricao,
+                book.id
+             ],
+             error => {
+                 if(error) {
+                     return reject ('Was not possible update book');
+                 }
+                     resolve();
+             });
+        });
+    }
 }
 
 module.exports = BookDao;
