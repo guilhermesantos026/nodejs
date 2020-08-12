@@ -1,13 +1,14 @@
 const db = require('../../config/database');
 
 const BookDao = require('../../app/infra/book-dao');
+const { response } = require('../../config/custom-express');
 
 module.exports = (app) => {
 
     app.get('/', function(req, resp) {
         resp.marko(
-            require('../views/books/default.marko')
-        );
+            require('../views/home/home.marko')
+        ); 
         
     });
 
