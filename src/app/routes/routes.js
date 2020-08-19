@@ -1,5 +1,5 @@
+const { body, validationResult } = require('express-validator');
 const db = require('../../config/database');
-
 const BookDao = require('../../app/infra/book-dao');
 const { response } = require('../../config/custom-express');
 
@@ -34,9 +34,24 @@ module.exports = (app) => {
         );
     });
 
-    app.post('/book', function(req, resp) {
+    app.post('/book', [
+        body('titulo').isLength({ min: 5 }).withMessage('O titulo precisa ter 5 caracteres'),
+        body('preco').isCurrency().withMessage('O preço precisa ter um valor monetário válido')
+    ],function(req, resp) {
 
         const bookDao = new BookDao(db);
+        
+        const errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+            return resp.marko(
+                require('../views/books/form/form.marko'),
+                {
+                    book: {},
+                    errorValidation: errors.array()
+                }
+            );
+        }
 
         bookDao.add(req.body)
         .then(resp.redirect('/books'))

@@ -24,6 +24,12 @@
             <div class="container">
                 <h1>Cadastro de livros</h1>
 
+                <div if(data.errorValidation)>
+                    <div class="alert alert-danger" for(error in data.errorValidation)>
+                        ${error.param} - ${error.msg}
+                    </div>
+                </div>
+
                 <form action="/book" method="post">
 
                     <if (data.book.id)>
@@ -41,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <label for="preco">Preço:</label>
-                        <input type="text" id="preco" name="preco" 
+                        <input type="text" id="fa" name="preco" 
                         value="${data.book.preco}" class="form-control" />
                     </div>
                     <div class="form-group">
