@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const template = require('../app/views/template');
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -26,13 +27,13 @@ routes(app);
 
 app.use(function(req, resp, next) {
   return resp.status(404).marko(
-    require('../app/views/error/404.marko')
+    template.home.error404
   )
 });
 
 app.use(function(error, req, resp, next) {
   return resp.status(500).marko(
-    require('../app/views/error/500.marko')
+    template.home.error500
   )
 }); 
 
