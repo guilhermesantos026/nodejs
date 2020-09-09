@@ -4,7 +4,8 @@ class HomeController {
 
     static routes() {
         return {
-            home: '/'
+            home: '/',
+            login: '/login'
         };
     }
 
@@ -12,8 +13,21 @@ class HomeController {
         return function(req, resp) {
             resp.marko(
                 (template.home.home)
-                //require('../views/home/home')
             ); 
+        }
+    }
+
+    login(){
+        return function(req, resp) {
+            resp.marko(
+                (template.home.login)
+            );
+        }
+    }
+
+    doLogin() {
+        return function(req, resp) {
+            
         }
     }
 }
