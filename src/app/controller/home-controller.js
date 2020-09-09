@@ -27,7 +27,7 @@ class HomeController {
 
     doLogin() {
         return function(req, resp) {
-            
+            console.log('login');
         }
     }
 }

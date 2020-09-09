@@ -4,18 +4,18 @@ const bd = new sqlite3.Database('data.db');
 const USUARIOS_SCHEMA = `
 CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    nome_completo VARCHAR(40) NOT NULL UNIQUE, 
+    full_name VARCHAR(40) NOT NULL UNIQUE, 
     email VARCHAR(255) NOT NULL, 
-    senha VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL
 )
 `;
 
 const INSERIR_USUARIO_1 = 
 `
 INSERT INTO usuarios (
-    nome_completo, 
+    full_name, 
     email,
-    senha
+    password
 ) SELECT 'Guilherme Fermino', 'guilherme@email.com.br', '123' WHERE NOT EXISTS (SELECT * FROM usuarios WHERE email = 'guilherme@email.com.br')
 `;
 

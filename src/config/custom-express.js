@@ -22,6 +22,8 @@ app.use(methodOverride(function (req, res) {
     }
 }));
 
+const sessionAuthentication = require('./session-authentication')
+
 const routes = require('../app/routes/routes');
 routes(app);
 
