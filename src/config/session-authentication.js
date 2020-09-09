@@ -3,7 +3,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-const userDao = require('../app/infra/user-dao.js');
+const UserDao = require('../app/infra/user-dao');
 const db = require('./database');
 const { initialize } = require('passport');
 
@@ -15,7 +15,7 @@ module.exports = (app) => {
             passwordField: 'password'
         },
         (email, password, done) => {
-            const userDao = new userDao(db);
+            const userDao = new UserDao(db);
             userDao.findByEmail(email)
                 .then(user => {
                     if(!user || password != user.password) {
@@ -24,7 +24,7 @@ module.exports = (app) => {
                         });
                     }
                     return done(null, user);
-                }). catch (error => (error, false));
+                }).catch(erro => done(erro, false));
         }
     ));
 
@@ -32,7 +32,6 @@ module.exports = (app) => {
         const userSession = {
             name: user.full_name,
             email: user.email
-
         };
         
         done(null, userSession);
@@ -46,7 +45,6 @@ module.exports = (app) => {
         secret: 'node alura',
         genid: function(req) {
             return uuid();
-
         },
         resave: false,
         saveUninitialized: false
@@ -54,4 +52,9 @@ module.exports = (app) => {
 
     app.use(passport.initialize());
     app.use(passport.session());
+
+    app.use(function (req, resp, next) {
+        req.passport = passport;
+        next();
+    });
 };
